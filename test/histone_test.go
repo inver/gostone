@@ -117,7 +117,7 @@ func TestConcreteSimple(t *testing.T) {
 			for index, testCase := range testCases.Cases {
 				testName := testCases.Name + "$" + strconv.Itoa(index)
 				t.Run(testName, func(t *testing.T) {
-					root, err := parser.Parse(testCase.Input, baseUri)
+					root, err := parser.Process(testCase.Input, baseUri)
 					if err != nil {
 						panic(err)
 					}

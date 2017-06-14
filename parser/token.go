@@ -1,9 +1,24 @@
 package parser
 
-type Token int
+type TokenType int
+
+type Token struct {
+	Value     string
+	Types     []TokenType
+	Index     int
+	IsIgnored bool
+}
+
+func NewTokenSingleType(value string, tType TokenType, index int) Token {
+	return Token{value, append(make([]TokenType, 0), tType), index, false}
+}
+
+func NewTokenMultiTypes(value string, types []TokenType, index int) Token {
+	return Token{value, append(make([]TokenType, 0), types...), index, false}
+}
 
 const (
-	PROP          Token = iota + 1
+	PROP          TokenType = iota + 1
 	STATEMENT
 	HEX
 	FLOAT
@@ -72,7 +87,7 @@ const (
 	AST_START
 	AST_END
 
-	EOF   Token = -1
-	ERROR Token = -2
-	TOKEN Token = -3
+	EOF   TokenType = -1
+	ERROR TokenType = -2
+	TOKEN TokenType = -3
 )
